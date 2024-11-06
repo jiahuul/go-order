@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package stockpb;
+
+option go_package = "github.com/jiahuul/go-order/internal/common/genproto/stockpb";
+
+import  "orderpb/order.proto";
+
+message Item {
+  string ID = 1;
+  string Name = 2;
+  int32 Quantity = 3;
+  string PriceID = 4;
+}
+
+message CheckIfItemsInStockRequest {
+  repeated orderpb.ItemWithQuantity items = 1;
+}
+
+message CheckIfItemsInStockResponse {
+  int32 InStock = 1;
+  repeated orderpb.Item Items = 2;
+}
+
+message GetItemsResponse {
+  repeated orderpb.Item Items = 1;
+}
+
+message GetItemsRequest {
+  repeated string ItemIDs = 1;
+}
+
+service StockService {
+  // 无返回值or无参数都可以使用google.protobuf.Empty
+  rpc GetItems(GetItemsRequest) returns (GetItemsResponse);
+  rpc CheckIfItemsInStock(CheckIfItemsInStockRequest) returns (CheckIfItemsInStockResponse);
+}
