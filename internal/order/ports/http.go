@@ -1,10 +1,14 @@
-package main
+package ports
 
 import (
 	"github.com/gin-gonic/gin"
 )
 
 type HTTPServer struct {
+}
+
+func NewHTTPServer() *HTTPServer {
+	return &HTTPServer{}
 }
 
 func (H HTTPServer) PostCustomerCustomerIDOrders(c *gin.Context, customerID string) {
